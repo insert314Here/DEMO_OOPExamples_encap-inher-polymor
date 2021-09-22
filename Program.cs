@@ -7,14 +7,22 @@ class Program
     {
         Console.WriteLine("what is the computers name?");
         string compName = Console.ReadLine();
-        var comp = new Computer(compName); //using constructor from 'computer.cs'
 
+        #region result of changing a class to abstract
+        //can no longer use a constructor "new"
+        //  var comp = new Computer(compName); //using constructor from 'computer.cs'
+        #endregion
+
+        //instantiating the desktop classes that inherits from base class Computer
+        //  once CaseType was created in the Desktop child class; need to define the caseType
+        var comp = new Desktop(compName, Desktop.CaseType.Tower); 
         Console.WriteLine("Computer Type - " + comp.GetType());
 
         var isComputer = comp is Computer;
 
         Console.WriteLine("Is computer - " + isComputer);
         Console.WriteLine("Computer name - " + comp.name);
+        Console.WriteLine("Computer case type - " + comp.caseType);
 
         //these methods run sequentially so the computer is turned on then off as final before writeline
         #region result of protected methods
@@ -24,8 +32,17 @@ class Program
 
         #endregion
 
-        comp.TogglePower(); //this call is still public which uses the PROTECTED methods
+        //this call is still public which uses the PROTECTED methods
+        comp.TogglePower(); 
         Console.WriteLine("Computer is on - "+comp.isOn);
+
+        comp.ToggleSleep();
+        Console.WriteLine("Computer is sleeping - " + comp.isSleeping);
+
+        comp.TogglePower();
+        Console.WriteLine("Computer is on - " + comp.isOn);
+
+
         Console.Read();
 
     }

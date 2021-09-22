@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace OOPExamples
 {
-    class Computer
+    //abstract classes allow for inheritance: this allows new classes to gain additional attributes...abstract cannot be directly insatiated
+    abstract class Computer
     {
         //public property
         public bool isOn { get; private set; }
 
         protected string _name = "Unknown";
 
-        public string name
+        public virtual string name //adding the virtual keyword allows for this property to be overriden
         {
             get
             {
@@ -47,7 +48,7 @@ namespace OOPExamples
         
         //the togglepower method protects turnon and off so no other methods can access protected methods
         //concept of encapsulation so certain methods are not initiated during runtime of program
-        public void TogglePower()
+        public virtual void TogglePower()
         {
             if (isOn)
             {
@@ -58,5 +59,7 @@ namespace OOPExamples
                 TurnOn();
             }
         }
+
+        //abstract classes allow for inheritance: this allows new classes to gain additional attributes...abstract cannot be directly insatiated
     }
 }
