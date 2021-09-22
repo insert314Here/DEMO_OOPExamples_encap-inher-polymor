@@ -10,8 +10,11 @@ namespace OOPExamples
 
     //desktop class would be considered a child class
 
-    class Desktop : Computer //inheriting from the computer class
+    class Desktop : Computer, ISleep //inheriting from the computer class
     {
+
+        private ISleep sleepController;
+
         public enum CaseType
         {
             Tower,
@@ -19,7 +22,14 @@ namespace OOPExamples
         }
 
         //creating a property that is specific to the desktop class
-        public bool isSleeping { get; private set; }
+        public bool isSleeping
+        {
+            get
+            {
+                return sleepController.isSleeping;
+            }
+        }
+
 
 
         //creating a property to access the desktop CaseType
@@ -44,6 +54,7 @@ namespace OOPExamples
         {
             //this is another constructor
             this.caseType = caseType;
+            sleepController = new SleepController();
         }
 
         //adding logice specific to only the desktop class
@@ -55,7 +66,7 @@ namespace OOPExamples
                 return;
             }
 
-            isSleeping = !isSleeping; //if above is true, this sets to false and vice versa
+            sleepController.ToggleSleep();
         }
 
         public override void TogglePower()
